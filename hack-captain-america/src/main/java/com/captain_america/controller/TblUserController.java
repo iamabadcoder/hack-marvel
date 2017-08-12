@@ -33,7 +33,7 @@ public class TblUserController {
 
     @RequestMapping("/user-detail")
     public String userDetail(Map<String, Object> model) {
-        TblUserDO tblUserDO = tblUserService.queryById(1L);
+        TblUserDO tblUserDO = tblUserService.findByUsernameAndEmail("hackx", "hackx@gmail.com");
         model.put("current_time", new Date());
         model.put("user_detail", tblUserDO);
         return "user-detail";

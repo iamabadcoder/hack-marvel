@@ -1,11 +1,12 @@
 package com.captain_america.service.impl;
 
 import com.captain_america.dataobject.TblUserDO;
-import com.captain_america.mapper.TblUserMapper;
+import com.captain_america.repository.TblUserRepository;
 import com.captain_america.service.TblUserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by 曹磊(Hackx) on 12/8/2017.
@@ -15,11 +16,25 @@ import javax.annotation.Resource;
 public class TblUserServiceImpl implements TblUserService {
 
     @Resource
-    TblUserMapper tblUserMapper;
+    TblUserRepository tblUserRepository;
 
     @Override
-    public TblUserDO queryById(Long id) {
-        // TODO 参数校验
-        return tblUserMapper.queryById(id);
+    public TblUserDO findByUsername(String username) {
+        return tblUserRepository.findByUsername(username);
+    }
+
+    @Override
+    public TblUserDO findByEmail(String email) {
+        return tblUserRepository.findByEmail(email);
+    }
+
+    @Override
+    public TblUserDO findByUsernameAndEmail(String username, String email) {
+        return tblUserRepository.findByUsernameAndEmail(username, email);
+    }
+
+    @Override
+    public List<TblUserDO> findByPassword(String password) {
+        return tblUserRepository.findByPassword(password);
     }
 }
