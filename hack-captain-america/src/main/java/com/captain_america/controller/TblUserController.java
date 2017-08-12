@@ -2,6 +2,8 @@ package com.captain_america.controller;
 
 import com.captain_america.dataobject.TblUserDO;
 import com.captain_america.service.TblUserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -16,12 +18,15 @@ import java.util.Map;
 @Controller
 public class TblUserController {
 
+    public static Logger logger = LoggerFactory.getLogger("captainAmericaLogger");
+
     @Resource
     TblUserService tblUserService;
 
 
     @RequestMapping("/")
     public String index(Map<String, Object> model) {
+        logger.info("request index page by someone~~");
         model.put("current_time", new Date());
         return "index";
     }

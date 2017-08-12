@@ -1,15 +1,27 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<configuration>
-    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
-        <Target>System.out</Target>
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration scan="true" scanPeriod="10 seconds" debug="false">
+    <!-- 控制台设置 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - [%thread] - %m%n</pattern>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+            </pattern>
         </encoder>
     </appender>
-    <logger name="com.hackx" additivity="false" level="TRACE">
-        <appender-ref ref="stdout"/>
+    <appender name="captainAmericaAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>logs/captain_america.log</File>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %-5level [%thread] %logger - %msg%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/captain_america.log.%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <logger name="captainAmericaLogger" level="INFO" additivity="false">
+        <appender-ref ref="captainAmericaAppender"/>
     </logger>
-    <root level="WARN">
-        <appender-ref ref="stdout"/>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
     </root>
 </configuration>
