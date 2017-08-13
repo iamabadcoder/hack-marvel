@@ -19,21 +19,20 @@ public class ChinaAdministrativeDivisionCodeSpider {
             Document document = Jsoup.connect(targetUrl).get();
             Element trsPreAppendElement = document.select("div.TRS_PreAppend").first();
             Elements msoNormalElements = trsPreAppendElement.select("p.MsoNormal");
-            System.out.println(msoNormalElements.size());
             String firstLevelName = "";
             String secondLevelName = "";
-            for (Element msoNormalEle : msoNormalElements){
-                if (msoNormalEle.getElementsByTag("b").size() > 0){
+            for (Element msoNormalEle : msoNormalElements) {
+                if (msoNormalEle.getElementsByTag("b").size() > 0) {
                     firstLevelName = msoNormalEle.text().trim().replaceAll(" ", "##");
-                }else if("　".equals(msoNormalEle.getElementsByTag("span").first().ownText())){
+                } else if ("　".equals(msoNormalEle.getElementsByTag("span").first().ownText())) {
                     secondLevelName = msoNormalEle.text().trim().replaceAll(" ", "##");
-                }else {
-                    System.out.println(firstLevelName + "##" + secondLevelName + "##" + msoNormalEle.text().trim().replaceAll(" ", "##"));
+                } else {
+                    String line = firstLevelName + "##" + secondLevelName + "##" + msoNormalEle.text().trim().replaceAll(" ", "##");
+                    System.out.println(line.replaceAll(" ", "").replaceAll("##", "\t"));
                 }
             }
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
-
 }
