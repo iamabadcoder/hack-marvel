@@ -11,6 +11,7 @@
     <modules>
 	    <module>hack-captain-america</module>
         <module>hack-hulk</module>
+        <module>hack-spider-man</module>
     </modules>
 
 </project>
